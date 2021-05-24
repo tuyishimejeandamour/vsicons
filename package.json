@@ -1,0 +1,103 @@
+{
+	"name": "study",
+	"displayName": "study",
+	"description": "studyng",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.56.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onView:stanicon-sidebar",
+		"onCommand:study.helloWorld",
+		"onCommand:study.copyicon",
+		"onCommand:study.refresh",
+		"onCommand:study.selection"
+	],
+	"main": "./dist/extension.js",
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "stanicon-sidebar-view",
+					"title": "Stanicon",
+					"icon": "media/images/stanicon.svg"
+				}
+			]
+		},
+		"views": {
+			"stanicon-sidebar-view": [
+				{
+					"type": "webview",
+					"id": "stanicon-sidebar",
+					"name": "Stanicon",
+					"icon": "media/images/stanicon.svg",
+					"contextualTitle": "Stanicon"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "study.helloWorld",
+				"title": "Hello World"
+			},
+			{
+				"command": "study.copyicon",
+				"category": "study",
+				"title": "copy icon"
+			},
+			{
+				"command": "study.refresh",
+				"category": "study",
+				"title": "refresh"
+			},
+			{
+				"command": "study.selection",
+				"category": "study selection",
+				"title": "add selection"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run package",
+		"compile": "webpack --config ./build/node-extension.webpack.config.js",
+		"watch": "concurrently \"rollup -c -w\" \"webpack --mode development --watch\"",
+		"package": "webpack --mode production --devtool hidden-source-map --config ./build/node-extension.webpack.config.js",
+		"test-compile": "tsc -p ./",
+		"test-watch": "tsc -watch -p ./",
+		"pretest": "npm run test-compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^19.0.0",
+		"@rollup/plugin-node-resolve": "^13.0.0",
+		"@rollup/plugin-typescript": "^8.2.1",
+		"@tsconfig/svelte": "^1.0.10",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.4",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.56.0",
+		"@typescript-eslint/eslint-plugin": "^4.14.1",
+		"@typescript-eslint/parser": "^4.14.1",
+		"concurrently": "^6.1.0",
+		"eslint": "^7.27.0",
+		"glob": "^7.1.6",
+		"mocha": "^8.2.1",
+		"node-sass": "^6.0.0",
+		"rollup": "^2.3.4",
+		"rollup-plugin-css-only": "^3.1.0",
+		"rollup-plugin-svelte": "^6.0.0",
+		"rollup-plugin-terser": "^7.0.2",
+		"svelte": "^3.38.2",
+		"svelte-check": "^1.5.4",
+		"svelte-preprocess": "^4.7.3",
+		"ts-loader": "^8.0.14",
+		"typescript": "^4.1.3",
+		"vscode-test": "^1.5.0",
+		"webpack": "^5.19.0",
+		"webpack-cli": "^4.4.0"
+	}
+}
