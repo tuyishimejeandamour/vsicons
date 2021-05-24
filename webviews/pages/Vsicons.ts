@@ -1,5 +1,5 @@
 
-import App from '../components/Helloworld.svelte';
+import App from '../components/Vsicons.svelte';
 
  const app = new App({
      target:document.body,

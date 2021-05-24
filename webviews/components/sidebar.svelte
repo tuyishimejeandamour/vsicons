@@ -4,7 +4,9 @@
 <div>
   <input type="text" />
   <div class="items-body">
-    <div class="items-body-content active">
+    <div class="items-body-content active" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'/media/icons/'})
+   }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

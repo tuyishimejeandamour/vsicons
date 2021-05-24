@@ -1,12 +1,12 @@
 import * as vscode from "vscode";
-import { getNonce } from "./getNounce";
-export class HelloWorldPanel {
+import { getNonce } from "./Main";
+export class VsiconsPanel {
   /**
    * Track the currently panel. Only allow a single panel to exist at a time.
    */
-  public static currentPanel: HelloWorldPanel | undefined;
+  public static currentPanel: VsiconsPanel | undefined;
 
-  public static readonly viewType = "hello-world";
+  public static readonly viewType = "vsicons";
 
   private readonly _panel: vscode.WebviewPanel;
   private readonly _extensionUri: vscode.Uri;
@@ -18,16 +18,16 @@ export class HelloWorldPanel {
       : undefined;
 
     // If we already have a panel, show it.
-    if (HelloWorldPanel.currentPanel) {
-      HelloWorldPanel.currentPanel._panel.reveal(column);
-      HelloWorldPanel.currentPanel._update();
+    if (VsiconsPanel.currentPanel) {
+      VsiconsPanel.currentPanel._panel.reveal(column);
+      VsiconsPanel.currentPanel._update();
       return;
     }
 
     // Otherwise, create a new panel.
     const panel = vscode.window.createWebviewPanel(
-      HelloWorldPanel.viewType,
-      "StanIcon",
+      VsiconsPanel.viewType,
+      "VsIcon",
       column || vscode.ViewColumn.One,
       {
         // Enable javascript in the webview
@@ -41,16 +41,16 @@ export class HelloWorldPanel {
       }
     );
 
-    HelloWorldPanel.currentPanel = new HelloWorldPanel(panel, extensionUri);
+    VsiconsPanel.currentPanel = new VsiconsPanel(panel, extensionUri);
   }
 
   public static kill() {
-    HelloWorldPanel.currentPanel?.dispose();
-    HelloWorldPanel.currentPanel = undefined;
+    VsiconsPanel.currentPanel?.dispose();
+    VsiconsPanel.currentPanel = undefined;
   }
 
   public static revive(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
-    HelloWorldPanel.currentPanel = new HelloWorldPanel(panel, extensionUri);
+    VsiconsPanel.currentPanel = new VsiconsPanel(panel, extensionUri);
   }
 
   private constructor(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
@@ -64,22 +64,10 @@ export class HelloWorldPanel {
     // This happens when the user closes the panel or when the panel is closed programatically
     this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
 
-    // // Handle messages from the webview
-    // this._panel.webview.onDidReceiveMessage(
-    //   (message) => {
-    //     switch (message.command) {
-    //       case "alert":
-    //         vscode.window.showErrorMessage(message.text);
-    //         return;
-    //     }
-    //   },
-    //   null,
-    //   this._disposables
-    // );
   }
 
   public dispose() {
-    HelloWorldPanel.currentPanel = undefined;
+    VsiconsPanel.currentPanel = undefined;
 
     // Clean up our resources
     this._panel.dispose();
@@ -112,11 +100,6 @@ export class HelloWorldPanel {
           vscode.window.showErrorMessage(data.value);
           break;
         }
-        // case "tokens": {
-        //   await Util.globalState.update(accessTokenKey, data.accessToken);
-        //   await Util.globalState.update(refreshTokenKey, data.refreshToken);
-        //   break;
-        // }
       }
     });
   }
@@ -124,10 +107,10 @@ export class HelloWorldPanel {
   private _getHtmlForWebview(webview: vscode.Webview) {
     // // And the uri we use to load this script in the webview
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out/compiled", "Helloworld.js")
+      vscode.Uri.joinPath(this._extensionUri, "out/compiled", "Vsicons.js")
     );
     const styleMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out/compiled", "Helloworld.css")
+      vscode.Uri.joinPath(this._extensionUri, "out/compiled", "Vsicons.css")
     );
 
     // // Uri to load styles into webview

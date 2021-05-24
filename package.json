@@ -11,7 +11,7 @@
 	],
 	"activationEvents": [
 		"onView:stanicon-sidebar",
-		"onCommand:study.helloWorld",
+		"onCommand:study.Vsicons",
 		"onCommand:study.copyicon",
 		"onCommand:study.refresh",
 		"onCommand:study.selection"
@@ -25,14 +25,8 @@
 					"title": "Stanicon",
 					"icon": "media/images/stanicon.svg"
 				}
-			],
-			"panel": [
-				{
-				  "id": "package-explorer",
-				  "title": "Package Explorer",
-				  "icon": "media/images/stanicon.svg"
-				}
-			  ]
+			]
+			
 		},
 		"views": {
 			"stanicon-sidebar-view": [
@@ -49,9 +43,18 @@
 			   }
 			]
 		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "study.refresh",
+					"when": "view == stanicon-sidebar-view",
+					"group": "navigation"
+				}
+			]
+		},
 		"commands": [
 			{
-				"command": "study.helloWorld",
+				"command": "study.Vsicons",
 				"title": "Hello World"
 			},
 			{
@@ -60,16 +63,26 @@
 				"title": "copy icon"
 			},
 			{
-				"command": "study.refresh",
-				"category": "study",
-				"title": "refresh"
-			},
-			{
 				"command": "study.selection",
 				"category": "study ",
 				"title": "add selection"
+			},
+			{
+                "command": "study.refresh",
+                "title": "Refresh",
+				"category": "study",
+                "icon": {
+                    "light": "media/images/stanicon.svg",
+                    "dark": "media/images/stanicon.svg"
+                }
+            }
+		],
+		"viewsWelcome": [
+			{
+			  "view": "study",
+			  "contents": "No node dependencies found [learn more](https://www.npmjs.com/).\n[Add Dependency](command:nodeDependencies.addEntry)"
 			}
-		]
+		  ]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run package",

@@ -1,6 +1,7 @@
+
 import * as vscode from "vscode";
 
-import { getNonce } from "./getNounce";
+import { getNonce } from "./Main";
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
@@ -28,6 +29,14 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             return;
           }
           vscode.window.showInformationMessage(data.value);
+          break;
+        }
+        case "all": {
+          if (!data.value) {
+            return;
+          }
+          //vscode.window.showWarningMessage(data.value);
+          vscode.commands.executeCommand("study.Vsicons", this._extensionUri+data.value);
           break;
         }
         case "onError": {

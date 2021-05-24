@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { HelloWorldPanel } from './helloWorldPanel';
+import { VsiconsPanel } from './IconsProvider';
 import { SidebarProvider } from './sidebarProvider';
 
 // this method is called when your extension is activated
@@ -15,8 +15,9 @@ export function activate(context: vscode.ExtensionContext) {
 		sidebarProvider
 	  )
 	);
-	context.subscriptions.push(vscode.commands.registerCommand('study.helloWorld', () => {
-		HelloWorldPanel.createOrShow(context.extensionUri);
+	context.subscriptions.push(vscode.commands.registerCommand('study.Vsicons', (data) => {
+	    vscode.window.showInformationMessage(data);
+		VsiconsPanel.createOrShow(context.extensionUri);
 	})
 	);
 	context.subscriptions.push(vscode.commands.registerCommand('study.selection', () => {
@@ -36,9 +37,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 	);
 	context.subscriptions.push(vscode.commands.registerCommand('study.refresh', () => {
-		HelloWorldPanel.kill();
+		VsiconsPanel.kill();
          vscode.commands.executeCommand('@command:workbench.action.reloadWindow');
-		HelloWorldPanel.createOrShow(context.extensionUri);
+		VsiconsPanel.createOrShow(context.extensionUri);
 	})
 
 	);
