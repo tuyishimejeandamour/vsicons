@@ -25,7 +25,14 @@
 					"title": "Stanicon",
 					"icon": "media/images/stanicon.svg"
 				}
-			]
+			],
+			"panel": [
+				{
+				  "id": "package-explorer",
+				  "title": "Package Explorer",
+				  "icon": "media/images/stanicon.svg"
+				}
+			  ]
 		},
 		"views": {
 			"stanicon-sidebar-view": [
@@ -35,7 +42,11 @@
 					"name": "Stanicon",
 					"icon": "media/images/stanicon.svg",
 					"contextualTitle": "Stanicon"
-				}
+				},
+				{
+					"id": "recentsavedicons",
+					"name": "Saved Icons"
+			   }
 			]
 		},
 		"commands": [
@@ -55,7 +66,7 @@
 			},
 			{
 				"command": "study.selection",
-				"category": "study selection",
+				"category": "study ",
 				"title": "add selection"
 			}
 		]

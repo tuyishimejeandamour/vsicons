@@ -576,6 +576,8 @@
             font-size: 24px;
             opacity: 0;
             transition: all 0.2s ease-in-out;
+            background-image: url(../../media/images/add.svg);
+            
             &:before {
                 content: "";
                 position: absolute;
