@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Modal from './Model.svelte'
 </script>
 
 <div>
