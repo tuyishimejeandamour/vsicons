@@ -8,9 +8,10 @@ export class VsiconsPanel {
 
   public static readonly viewType = "vsicons";
 
-  private readonly _panel: vscode.WebviewPanel;
+ public readonly _panel: vscode.WebviewPanel;
   private readonly _extensionUri: vscode.Uri;
   private _disposables: vscode.Disposable[] = [];
+  public static _view?: vscode.WebviewPanel;
 
   public static createOrShow(extensionUri: vscode.Uri) {
     const column = vscode.window.activeTextEditor
@@ -55,6 +56,7 @@ export class VsiconsPanel {
 
   private constructor(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
     this._panel = panel;
+    VsiconsPanel._view = panel;
     this._extensionUri = extensionUri;
 
     // Set the webview's initial html content
@@ -65,6 +67,7 @@ export class VsiconsPanel {
     this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
 
   }
+
 
   public dispose() {
     VsiconsPanel.currentPanel = undefined;
@@ -93,6 +96,13 @@ export class VsiconsPanel {
           vscode.window.showInformationMessage(data.value);
           break;
         }
+        case "data": {
+          if (!data.value) {
+            return;
+          }
+          vscode.window.showInformationMessage(data.value);
+          break;
+        }
         case "onError": {
           if (!data.value) {
             return;
@@ -112,7 +122,7 @@ export class VsiconsPanel {
     const styleMainUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, "out/compiled", "Vsicons.css")
     );
-
+    
     // // Uri to load styles into webview
     const stylesResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
       this._extensionUri,
@@ -140,8 +150,8 @@ export class VsiconsPanel {
 					and only allow scripts that have a specific nonce.
         -->
         <meta http-equiv="Content-Security-Policy" content=" img-src https: data:; style-src 'unsafe-inline' ${
-      webview.cspSource
-    }; script-src 'nonce-${nonce}';">
+          webview.cspSource
+        }; script-src 'nonce-${nonce}';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<link href="${stylesResetUri}" rel="stylesheet">
 				<link href="${styleMainUri}" rel="stylesheet">

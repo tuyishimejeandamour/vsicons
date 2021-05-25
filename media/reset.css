@@ -35,3 +35,8 @@ html {
     display: flex;
     flex-direction: column;
   }
+  .icon-info svg {
+    width: 30px !important;
+    height: 30px !important;
+    fill: rgb(223, 223, 223);
+}

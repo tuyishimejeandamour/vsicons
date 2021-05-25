@@ -2,7 +2,9 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { VsiconsPanel } from './IconsProvider';
+import { getfilearrys, traverseDirectory } from './Main';
 import { SidebarProvider } from './sidebarProvider';
+import * as fs from 'fs';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -16,7 +18,16 @@ export function activate(context: vscode.ExtensionContext) {
 	  )
 	);
 	context.subscriptions.push(vscode.commands.registerCommand('study.Vsicons', (data) => {
-	    vscode.window.showInformationMessage(data);
+		traverseDirectory(data, function(err:any, result:any) {
+			if (err) {
+			  console.log(err);
+			  return;
+			}else{
+			 VsiconsPanel._view?.webview.postMessage({ type:"all",value:result });
+			}
+			
+			
+		  });
 		VsiconsPanel.createOrShow(context.extensionUri);
 	})
 	);
@@ -38,7 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 	context.subscriptions.push(vscode.commands.registerCommand('study.refresh', () => {
 		VsiconsPanel.kill();
-         vscode.commands.executeCommand('@command:workbench.action.reloadWindow');
+         vscode.commands.executeCommand('workbench.action.reloadWindow');
 		VsiconsPanel.createOrShow(context.extensionUri);
 	})
 

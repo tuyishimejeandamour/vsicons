@@ -5,8 +5,8 @@
   <input type="text" />
   <div class="items-body">
     <div class="items-body-content active" on:click={()=>{
-      tsvscode.postMessage({type:"all",value:'/media/icons/'})
-   }}>
+      tsvscode.postMessage({type:"all",value:'media/icons'})
+          }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -19,7 +19,9 @@
       >
       <span>all</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Builings'})
+      }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -32,7 +34,9 @@
       >
       <span>Builings</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Business'})
+       }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -45,7 +49,9 @@
       >
       <span>Business</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Communication'})
+       }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -58,7 +64,9 @@
       >
       <span>Communication</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Design'})
+       }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -71,7 +79,9 @@
       >
       <span>Design</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Development'})
+   }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -84,7 +94,9 @@
       >
       <span>Development</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Device'})
+   }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -98,7 +110,9 @@
       <span>Device</span>
     </div>
 
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Editor'})
+        }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -111,7 +125,9 @@
       >
       <span>Editor</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Document'})
+   }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -124,20 +140,10 @@
       >
       <span>Document</span>
     </div>
-    <div class="items-body-content">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="18"
-        height="18"
-        ><path fill="none" d="M0 0h24v24H0z" /><path
-          d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v14h14V5H5zm6 6V7h2v4h4v2h-4v4h-2v-4H7v-2h4z"
-          fill="rgba(255,255,255,1)"
-        /></svg
-      >
-      <span>Editor</span>
-    </div>
-    <div class="items-body-content">
+  
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Finance'})
+   }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -150,7 +156,9 @@
       >
       <span>Finance</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Health'})
+   }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -163,7 +171,9 @@
       >
       <span>Health & Medical</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Logos'})
+   }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -176,7 +186,9 @@
       >
       <span>Logos</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Map'})
+   }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -189,7 +201,9 @@
       >
       <span>Map</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Media'})
+   }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -202,7 +216,9 @@
       >
       <span>Media</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/System'})
+   }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -215,7 +231,9 @@
       >
       <span>System</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/User'})
+   }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -228,7 +246,9 @@
       >
       <span>User & Faces</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Weather'})
+   }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -241,7 +261,9 @@
       >
       <span>Weather</span>
     </div>
-    <div class="items-body-content">
+    <div class="items-body-content" on:click={()=>{
+      tsvscode.postMessage({type:"all",value:'media/icons/Others'})
+   }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

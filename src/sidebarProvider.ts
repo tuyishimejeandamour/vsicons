@@ -36,7 +36,8 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             return;
           }
           //vscode.window.showWarningMessage(data.value);
-          vscode.commands.executeCommand("study.Vsicons", this._extensionUri+data.value);
+          const fileurl = webviewView.webview.asWebviewUri( vscode.Uri.joinPath(this._extensionUri,data.value));
+          vscode.commands.executeCommand("study.Vsicons",fileurl.fsPath);
           break;
         }
         case "onError": {
