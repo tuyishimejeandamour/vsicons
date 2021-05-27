@@ -1,12 +1,12 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import clipBoard from "./clipBoard.svelte";
     import { icons } from "./icons/buildings";
     import Model from "./Model.svelte";
-    import {HsvPicker} from 'svelte-color-picker';
+    import { HsvPicker } from "svelte-color-picker";
+    import Clipboard from "svelte-clipboard";
     let modal: any;
     let iconsarray = icons;
-    let currentsvg: {name:string,content:string};
+    let currentsvg: { name: string; content: string };
     onMount(() => {
         window.addEventListener("message", (event) => {
             const message = event.data;
@@ -27,19 +27,9 @@
             return str;
         }
     }
-    let name = "world";
-
-    const copy = () => {
-        const app = new clipBoard({
-            target: document.getElementById("clipboard"),
-            props: { name },
-        });
-        app.$destroy();
-    };
-   
-function colorCallback(rgba:any) {
-	console.log(rgba.detail)
-}
+    function colorCallback(rgba: any) {
+        console.log(rgba.detail);
+    }
 </script>
 
 <div>
@@ -72,11 +62,17 @@ function colorCallback(rgba:any) {
     <Model bind:this={modal}>
         <div class="card">
             <div class="img-avatar">
-                <textarea
-                    bind:value={currentsvg.content}
-                    type="text"
-                    id="mysvg"
-                    style="display:none"
+                <!-- svelte-ignore missing-declaration -->
+                <Clipboard
+                    text={currentsvg.content}
+                    let:copy
+                    on:copy={() => {
+                         tsiconvscode.postMessage({
+                                    type: "copied",
+                                    value: "copied",
+                                    name: currentsvg.name,
+                                });
+                    }}
                 />
                 {@html currentsvg.content}
             </div>
@@ -84,42 +80,74 @@ function colorCallback(rgba:any) {
                 <div class="portada" />
                 <div class="title-total">
                     <div class="title">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-11H7v2h4v4h2v-4h4v-2h-4V7h-2v4z" fill="rgba(255,255,255,1)"/></svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            height="24"
+                            ><path fill="none" d="M0 0h24v24H0z" /><path
+                                d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-11H7v2h4v4h2v-4h4v-2h-4V7h-2v4z"
+                                fill="rgba(255,255,255,1)"
+                            /></svg
+                        >
                         <span>add collection</span>
                     </div>
                     <h2>{currentsvg.name}</h2>
 
                     <div class="desc">
-                        <HsvPicker on:colorChange={colorCallback} startColor={"#FBFBFB"}/>
+                        <HsvPicker
+                            on:colorChange={colorCallback}
+                            startColor={"#FBFBFB"}
+                        />
                     </div>
                     <div class="actions">
-                        <button
-                            title="copy svg"
-                            class="button"
-                            on:click={copy}
+                        <Clipboard
+                            text="Your Text Need to Copy"
+                            let:copy
+                            on:copy={() => {
+                                console.log("Has Copied");
+                            }}
                         >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                width="24"
-                                height="24"
-                                ><path fill="none" d="M0 0h24v24H0z" /><path
-                                    d="M6 4v4h12V4h2.007c.548 0 .993.445.993.993v16.014a.994.994 0 0 1-.993.993H3.993A.994.994 0 0 1 3 21.007V4.993C3 4.445 3.445 4 3.993 4H6zm2-2h8v4H8V2z"
-                                    fill="rgba(255,255,255,1)"
-                                /></svg
+                            <!-- svelte-ignore missing-declaration -->
+                            <button
+                                title="copy svg"
+                                class="button"
+                                on:click={()=>{
+                                     copy;
+                                tsiconvscode.postMessage({
+                                    type: "copied",
+                                    value: currentsvg.content,
+                                    name: currentsvg.name,
+                                });
+                                }
+                               
+
+                                
+                                }
                             >
-                            <span>Copy Svg</span>
-                        </button>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="24"
+                                    height="24"
+                                    ><path fill="none" d="M0 0h24v24H0z" /><path
+                                        d="M6 4v4h12V4h2.007c.548 0 .993.445.993.993v16.014a.994.994 0 0 1-.993.993H3.993A.994.994 0 0 1 3 21.007V4.993C3 4.445 3.445 4 3.993 4H6zm2-2h8v4H8V2z"
+                                        fill="rgba(255,255,255,1)"
+                                    /></svg
+                                >
+                                <span>Copy Svg</span>
+                            </button>
+                        </Clipboard>
                         <!-- svelte-ignore missing-declaration -->
                         <button
-                        style="margin-left: 10px;"
+                            style="margin-left: 10px;"
                             title="insert svg"
                             class="button"
                             on:click={() => {
                                 tsiconvscode.postMessage({
                                     type: "insert",
                                     value: currentsvg.content,
-                                    name:currentsvg.name
+                                    name: currentsvg.name,
                                 });
                             }}
                         >
@@ -153,11 +181,10 @@ function colorCallback(rgba:any) {
         display: flex;
         flex-wrap: wrap;
         padding-left: 30px;
-        width: calc(100% - 30px);
+        width: calc(100%);
         flex-wrap: wrap;
         height: auto;
-        box-shadow: -1px 6px 5px -3px rgba(0,0,0,0.75);
-
+        box-shadow: -1px 6px 5px -3px rgba(0, 0, 0, 0.75);
     }
     .icon-item {
         position: relative;
@@ -233,7 +260,6 @@ function colorCallback(rgba:any) {
         color: green;
         font-weight: bold;
         font-size: 12px;
-       
     }
     .card .desc {
         padding: 0.5rem 1rem;
@@ -290,7 +316,6 @@ function colorCallback(rgba:any) {
         background-size: cover;
     }
 
-
     .button {
         display: flex;
         margin-left: 6px;
@@ -315,7 +340,7 @@ function colorCallback(rgba:any) {
     }
     .icon-type-name {
         display: block;
-        
+
         font-size: 18px;
         font-weight: 600;
         color: #eff2f7;

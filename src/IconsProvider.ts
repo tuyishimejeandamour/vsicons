@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import { getNonce } from "./Main";
 import * as fs from "fs";
+import * as path from 'path';
 export class VsiconsPanel {
   /**
    * Track the currently panel. Only allow a single panel to exist at a time.
@@ -9,7 +10,7 @@ export class VsiconsPanel {
 
   public static readonly viewType = "vsicons";
 
- public readonly _panel: vscode.WebviewPanel;
+  public readonly _panel: vscode.WebviewPanel;
   private readonly _extensionUri: vscode.Uri;
   private _disposables: vscode.Disposable[] = [];
   public static _view?: vscode.WebviewPanel;
@@ -104,30 +105,41 @@ export class VsiconsPanel {
           vscode.window.showInformationMessage(data.value);
           break;
         }
+        case "copied": {
+          if (!data.value) {
+            vscode.window.showErrorMessage("nothing to copy");
+            return;
+          }
+          vscode.env.clipboard.writeText(data.value);
+          vscode.window.showInformationMessage("copied");
+          break;
+        }
         case "insert": {
           if (!data.value) {
             return;
           }
-          
-          if(vscode &&vscode.workspace && vscode.workspace.workspaceFolders){
+
+          if (vscode && vscode.workspace && vscode.workspace.workspaceFolders) {
             const folderpath = vscode.workspace.workspaceFolders[0].uri.path.split(":")[1].toString();
-            console.log(folderpath);
-            fs.mkdir(folderpath+"\\assests\\icons", {recursive:true}, (err)=>{
-              if (err) {console.log(`Error creating directory: ${err}`);}
+            const fullpath = folderpath + "\\vsicons\\icons";
+            fs.mkdir(fullpath, { recursive: true }, (err) => {
+              if (err) { console.log(`Error creating directory: ${err}`); }
               // Directory now exists.
             });
-          }else{
+
+            fs.writeFile(path.join(fullpath, data.name + ".svg"), data.value, error => {
+
+              if (error) {
+                vscode.window.showErrorMessage("error in creating file" + error);
+              } else {
+                vscode.window.showInformationMessage("svg successfull created");
+              }
+
+            });
+
+          } else {
             vscode.window.showErrorMessage("no workspace provides");
           }
-         
-
-
-          // vscode.window.onDidChangeActiveTextEditor(editor => {
-          //   if (editor) {
-          //     console.log(editor.document);
-          //   }
-          // });
-          vscode.window.showInformationMessage(data.value);
           break;
         }
         case "onError": {
@@ -149,7 +161,7 @@ export class VsiconsPanel {
     const styleMainUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, "out/compiled", "Vsicons.css")
     );
-    
+
     // // Uri to load styles into webview
     const stylesResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
       this._extensionUri,
@@ -176,9 +188,8 @@ export class VsiconsPanel {
 					Use a content security policy to only allow loading images from https or from our extension directory,
 					and only allow scripts that have a specific nonce.
         -->
-        <meta http-equiv="Content-Security-Policy" content=" img-src https: data:; style-src 'unsafe-inline' ${
-          webview.cspSource
-        }; script-src 'nonce-${nonce}';">
+        <meta http-equiv="Content-Security-Policy" content=" img-src https: data:; style-src 'unsafe-inline' ${webview.cspSource
+      }; script-src 'nonce-${nonce}';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<link href="${stylesResetUri}" rel="stylesheet">
 				<link href="${styleMainUri}" rel="stylesheet">

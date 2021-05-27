@@ -1,7 +1,8 @@
 {
-	"name": "study",
-	"displayName": "study",
-	"description": "studyng",
+	"name": "vsicons",
+	"displayName": "Vsicons",
+	"description": "Vsiconsng",
+	"publisher": "logicdiscovered",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.56.0"
@@ -9,12 +10,13 @@
 	"categories": [
 		"Other"
 	],
+	"icon": "media/images/stanicon.png",
 	"activationEvents": [
 		"onView:stanicon-sidebar",
-		"onCommand:study.Vsicons",
-		"onCommand:study.copyicon",
-		"onCommand:study.refresh",
-		"onCommand:study.selection"
+		"onCommand:Vsicons.Vsicons",
+		"onCommand:Vsicons.copyicon",
+		"onCommand:Vsicons.refresh",
+		"onCommand:Vsicons.selection"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
@@ -45,7 +47,7 @@
 		"menus": {
 			"view/title": [
 				{
-					"command": "study.refresh",
+					"command": "Vsicons.refresh",
 					"when": "view == stanicon-sidebar-view",
 					"group": "navigation"
 				}
@@ -53,23 +55,23 @@
 		},
 		"commands": [
 			{
-				"command": "study.Vsicons",
+				"command": "Vsicons.Vsicons",
 				"title": "vsicons"
 			},
 			{
-				"command": "study.copyicon",
-				"category": "study",
+				"command": "Vsicons.copyicon",
+				"category": "Vsicons",
 				"title": "copy icon"
 			},
 			{
-				"command": "study.selection",
-				"category": "study ",
+				"command": "Vsicons.selection",
+				"category": "Vsicons ",
 				"title": "add selection"
 			},
 			{
-				"command": "study.refresh",
+				"command": "Vsicons.refresh",
 				"title": "Refresh",
-				"category": "study",
+				"category": "Vsicons",
 				"icon": {
 					"light": "media/images/stanicon.svg",
 					"dark": "media/images/stanicon.svg"
@@ -78,16 +80,16 @@
 		],
 		"viewsWelcome": [
 			{
-				"view": "study",
+				"view": "Vsicons",
 				"contents": "No node dependencies found [learn more](https://www.npmjs.com/).\n[Add Dependency](command:nodeDependencies.addEntry)"
 			}
 		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run package",
-		"compile": "webpack --config ./build/node-extension.webpack.config.js",
+		"compile": "webpack",
 		"watch": "concurrently \"rollup -c -w\" \"webpack --mode development --watch\"",
-		"package": "webpack --mode production --devtool hidden-source-map --config ./build/node-extension.webpack.config.js",
+		"package": "webpack --mode production --devtool hidden-source-map",
 		"test-compile": "tsc -p ./",
 		"test-watch": "tsc -watch -p ./",
 		"pretest": "npm run test-compile && npm run lint",
@@ -125,6 +127,7 @@
 	},
 	"dependencies": {
 		"sass": "^1.34.0",
+		"svelte-clipboard": "0.0.2",
 		"svelte-color-picker": "^1.0.7"
 	}
 }
