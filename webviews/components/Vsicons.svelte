@@ -94,7 +94,7 @@ function colorCallback(rgba:any) {
                     </div>
                     <div class="actions">
                         <button
-                            title="Download PNG Format"
+                            title="copy svg"
                             class="button"
                             on:click={copy}
                         >
@@ -113,12 +113,13 @@ function colorCallback(rgba:any) {
                         <!-- svelte-ignore missing-declaration -->
                         <button
                         style="margin-left: 10px;"
-                            title="Download PNG Format"
+                            title="insert svg"
                             class="button"
                             on:click={() => {
-                                tsvscode.postMessage({
+                                tsiconvscode.postMessage({
                                     type: "insert",
-                                    value: currentsvg,
+                                    value: currentsvg.content,
+                                    name:currentsvg.name
                                 });
                             }}
                         >

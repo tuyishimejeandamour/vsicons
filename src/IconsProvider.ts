@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { getNonce } from "./Main";
+import * as fs from "fs";
 export class VsiconsPanel {
   /**
    * Track the currently panel. Only allow a single panel to exist at a time.
@@ -107,6 +108,25 @@ export class VsiconsPanel {
           if (!data.value) {
             return;
           }
+          
+          if(vscode &&vscode.workspace && vscode.workspace.workspaceFolders){
+            const folderpath = vscode.workspace.workspaceFolders[0].uri.path.split(":")[1].toString();
+            console.log(folderpath);
+            fs.mkdir(folderpath+"\\assests\\icons", {recursive:true}, (err)=>{
+              if (err) {console.log(`Error creating directory: ${err}`);}
+              // Directory now exists.
+            });
+          }else{
+            vscode.window.showErrorMessage("no workspace provides");
+          }
+         
+
+
+          // vscode.window.onDidChangeActiveTextEditor(editor => {
+          //   if (editor) {
+          //     console.log(editor.document);
+          //   }
+          // });
           vscode.window.showInformationMessage(data.value);
           break;
         }
@@ -165,7 +185,7 @@ export class VsiconsPanel {
 				<link href="${stylesvsUri}" rel="stylesheet">
         <link href="" rel="stylesheet">
         <script nonce="${nonce}">
-        const tsvscode = acquireVsCodeApi();
+        const tsiconvscode = acquireVsCodeApi();
         </script>
 			</head>
       <body>
