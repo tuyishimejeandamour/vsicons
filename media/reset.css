@@ -38,5 +38,10 @@ html {
   .icon-info svg {
     width: 30px !important;
     height: 30px !important;
-    fill: rgb(223, 223, 223);
+    fill: rgb(226, 226, 226);
+}
+.img-avatar svg{
+  width: 60px !important;
+   height: 60px !important;
+    fill: rgb(226, 226, 226);
 }

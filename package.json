@@ -54,7 +54,7 @@
 		"commands": [
 			{
 				"command": "study.Vsicons",
-				"title": "Hello World"
+				"title": "vsicons"
 			},
 			{
 				"command": "study.copyicon",

@@ -103,6 +103,13 @@ export class VsiconsPanel {
           vscode.window.showInformationMessage(data.value);
           break;
         }
+        case "insert": {
+          if (!data.value) {
+            return;
+          }
+          vscode.window.showInformationMessage(data.value);
+          break;
+        }
         case "onError": {
           if (!data.value) {
             return;
@@ -158,7 +165,7 @@ export class VsiconsPanel {
 				<link href="${stylesvsUri}" rel="stylesheet">
         <link href="" rel="stylesheet">
         <script nonce="${nonce}">
-            
+        const tsvscode = acquireVsCodeApi();
         </script>
 			</head>
       <body>
